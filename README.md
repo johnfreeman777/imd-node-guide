@@ -331,3 +331,7 @@ This is the part nobody tells you.
 
 Corrections and additions welcome; open an issue or PR on the repository that hosts
 this file. Not affiliated with the IdentityMD developer.
+
+---
+
+Licensed under [CC BY 4.0](LICENSE).
