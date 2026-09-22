@@ -9,6 +9,11 @@ the on-chain messages from the collection owner, and `imd help` on your machine.
 Written for Ubuntu 24.04 with the Codex CLI as the runtime. Claude Code works the
 same way; the differences are noted where they matter.
 
+> **Shortcut:** [`kit/imd-node.sh`](kit/) automates §3–§6 and §10 on a fresh server,
+> including the sandbox fix and a real sandbox smoke test. It stops at CLI sign-in
+> and wallet pairing, which only you can do. The rest of this guide explains what it
+> does and why.
+
 ---
 
 ## 1. What you need
