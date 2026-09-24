@@ -320,7 +320,51 @@ This is the part nobody tells you.
 - **Changing runtime or concurrency:** wait until idle, then `imd service uninstall`
   and `imd service install` with the new flags. A restart mid-task is a failed run.
 
-## 12. Quick reference
+## 12. Join the holders' Telegram group
+
+Operators trade setup tips, and the developer posts release notes, in **IMD Daemon
+Secret Group**. It is a Telegram group gated to identity.md holders by
+[Collab.Land](https://docs.collab.land/help-docs/FAQ/join-tg-group/). You need at least
+one NFT in the wallet you verify with.
+
+**Take the invite from the chain, not from a forwarded message.** The developer
+posted it as an on-chain message on 21 September 2026:
+[tx `0x325567ff…15ab8`](https://etherscan.io/tx/0x325567ff552acc8452951521261f104fb27bcb7bddc8f032a93a9dff17a15ab8).
+On Etherscan, open *More details → Input Data → View Input As → UTF-8*. At the time
+of writing it points to:
+
+```
+https://telegram.me/collablandbot?start=VFBDI1RFTCNDT01NIy0xMDA0NDE2MDI5OTg0
+```
+
+If a newer on-chain message replaces it, use that one.
+
+1. Open the link on the device where you use Telegram and press **START**. The chat
+   must be with **@collablandbot**, exactly. Collab.Land warns that there are many
+   imposters with similar names.
+2. Check that the community the bot names is *IMD Daemon Secret Group*.
+3. Press **Connect Wallet**. Your browser opens Collab.Land's page. Pick the wallet
+   that holds the NFT, on your own computer or phone, never on the node server.
+4. **Sign** the connection request. It is a signed message: no transaction, no gas,
+   no token approval. Do it within 5 minutes or start over.
+5. Back in Telegram, press **Join Group**.
+
+Stop immediately if anything in this flow asks you to send a transaction, approve
+tokens or NFTs (`approve`, `setApprovalForAll`), or enter a seed phrase or private key.
+Verification is a signature and nothing else.
+
+Good to know:
+
+- Collab.Land re-checks holdings over time. If the NFT leaves the wallet, access goes
+  with it.
+- Verifying links that wallet address to your Telegram account inside Collab.Land. If
+  you would rather not link your main wallet, hold the NFT in a separate wallet.
+- Be suspicious of DMs offering "support", airdrops or claim links, even from people
+  you have seen in the group. The developer's account carries the group's owner badge.
+  Official announcements also go out as on-chain messages from
+  [`0x200E…0fB1`](https://etherscan.io/address/0x200E710aCAA6A93bbc77146026328C40F1d60fB1).
+
+## 13. Quick reference
 
 | Task | Command |
 |---|---|
