@@ -86,7 +86,11 @@ check_os() {
   local mem_mb; mem_mb=$(awk '/MemTotal/ {print int($2/1024)}' /proc/meminfo)
   local disk_gb; disk_gb=$(df -Pk / | awk 'NR==2 {print int($4/1024/1024)}')
   ok "RAM ${mem_mb} MB, free disk ${disk_gb} GB"
-  [ "$mem_mb" -ge 1800 ] || warn "under 2 GB RAM: Foundry builds may run out of memory"
+  if [ "$mem_mb" -lt 1800 ]; then
+    warn "under 2 GB RAM: even oracle work may run out of memory"
+  elif [ "$mem_mb" -lt 8192 ]; then
+    warn "under 8 GiB RAM: contract builds (via_ir) get OOM-killed; add RAM or remove contract skills (guide §1)"
+  fi
   [ "$disk_gb" -ge 10 ] || warn "under 10 GB free disk: task workspaces need room"
 }
 

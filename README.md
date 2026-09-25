@@ -26,9 +26,21 @@ same way; the differences are noted where they matter.
 - **A wallet that holds the NFT**, on your laptop, in a browser. It signs a pairing
   message and one ERC‑8004 registration transaction. **The wallet never goes on the
   server.**
-- **A small VPS.** 2 vCPU / 4 GB RAM / ~40 GB disk is plenty for `--concurrency 1`
-  or `2`; it idles at almost zero load and spikes only while Foundry compiles.
-  Roughly $20/month on any provider.
+- **A VPS with enough memory for contract work.** Memory matters more than CPU. The
+  node idles at almost zero load, but contract projects compiled with `via_ir` need
+  about **8 GiB for a single Foundry build**. Below that, forge is OOM-killed and the
+  whole run is lost. Since release `0.1.0+5bfa8261`, `imd doctor` checks this and
+  shows `✗ memory` under 8 GiB. Sizing:
+  - **One seat:** a plan that *reports* at least 8 GiB. Plans sold as "8 GB"
+    usually report about 7.7 GiB and still fail the check, so in practice you need
+    the next size up.
+  - **Two seats on one server, or `--concurrency 2`:** 16 GB. Two builds can run at
+    the same time.
+  - **Smaller box (4 GB):** fine for oracle work only. Remove the contract skills
+    (`imd skills`, `imd skills remove <id>`) so the network stops sending you work
+    that will fail.
+
+  The disk can stay small: ~40 GB is plenty with the cleanup job from §10.
 
 ## 2. Why a dedicated server, and what the risk actually is
 
@@ -266,8 +278,10 @@ From the developer, and consistent with what we have observed:
   panel task): "required outputs are missing or invalid" when the small model
   produces a malformed `answer.json`, "selected model is at capacity", and the
   occasional upload 500. None of these need action unless they repeat.
-- Only one class of failure is your fault and fixable: the sandbox problem in §3a,
-  which produces several confident junk answers in a row.
+- Two classes of failure are your fault and fixable. The first is the sandbox problem
+  in §3a, which produces several confident junk answers in a row. The second is too
+  little memory for contract builds (§1): forge is OOM-killed mid-run. If `imd doctor`
+  shows `✗ memory`, add RAM or remove the contract skills.
 
 ## 9. Quota: how much of your subscription this eats
 

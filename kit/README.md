@@ -7,7 +7,8 @@ wallet in your own browser.
 
 Unofficial. Read it before you run it; it is one file of plain bash.
 
-Tested end to end on a fresh Ubuntu 24.04 VPS (1 vCPU, 2 GB RAM): `setup --seats 2`
+Setup was tested end to end on a fresh Ubuntu 24.04 VPS (1 vCPU, 2 GB RAM). That box is
+too small for contract work; see the guide's §1 for sizing. `setup --seats 2`
 took about 70 seconds. A second run skips what is done. The settings survive a
 reboot. With the sandbox fix `bwrap` runs; without it you get the exact
 `setting up uid map: Permission denied` failure described in the guide.
@@ -43,7 +44,7 @@ bash imd-node.sh logs 1      # follow a seat's log; Ctrl-C closes the viewer, no
 
 | Step | Detail |
 |---|---|
-| Checks the machine | OS, RAM, free disk; warns below 2 GB RAM or 10 GB disk |
+| Checks the machine | OS, RAM, free disk; warns below 8 GiB RAM (contract builds need it, see guide §1) or 10 GB disk |
 | Packages | `git`, `curl`, `build-essential`, `ufw`, `unattended-upgrades` |
 | Swap | 4 GB swap file if the server has none, so Foundry builds are not OOM-killed |
 | Firewall | ufw: deny inbound, allow outbound, allow your current SSH port |
