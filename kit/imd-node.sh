@@ -88,8 +88,8 @@ check_os() {
   ok "RAM ${mem_mb} MB, free disk ${disk_gb} GB"
   if [ "$mem_mb" -lt 1800 ]; then
     warn "under 2 GB RAM: even oracle work may run out of memory"
-  elif [ "$mem_mb" -lt 8192 ]; then
-    warn "under 8 GiB RAM: contract builds (via_ir) get OOM-killed; add RAM or remove contract skills (guide §1)"
+  elif [ "$mem_mb" -lt 4096 ]; then
+    warn "under 4 GiB RAM: imd doctor rejects contract work; add RAM or remove contract skills (guide §1)"
   fi
   [ "$disk_gb" -ge 10 ] || warn "under 10 GB free disk: task workspaces need room"
 }

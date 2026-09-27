@@ -27,18 +27,24 @@ same way; the differences are noted where they matter.
   message and one ERC‑8004 registration transaction. **The wallet never goes on the
   server.**
 - **A VPS with enough memory for contract work.** Memory matters more than CPU. The
-  node idles at almost zero load, but contract projects compiled with `via_ir` need
-  about **8 GiB for a single Foundry build**. Below that, forge is OOM-killed and the
-  whole run is lost. Since release `0.1.0+5bfa8261`, `imd doctor` checks this and
-  shows `✗ memory` under 8 GiB. Sizing:
-  - **One seat:** a plan that *reports* at least 8 GiB. Plans sold as "8 GB"
-    usually report about 7.7 GiB and still fail the check, so in practice you need
-    the next size up.
-  - **Two seats on one server, or `--concurrency 2`:** 16 GB. Two builds can run at
-    the same time.
-  - **Smaller box (4 GB):** fine for oracle work only. Remove the contract skills
+  node idles at almost zero load and spikes only while Foundry compiles. If a build runs
+  out of memory, forge is OOM-killed and the whole run is lost. `imd doctor` checks
+  this and shows `✗ memory` when the machine is below the worker's threshold:
+  - Since release `0.1.0+5cdc3b11` (26 Sep) the worker first builds without `via_ir`,
+    which needs far less memory, and the threshold is **4 GiB**. (Releases
+    `5bfa8261` to `5cdc3b11` asked for 8 GiB; that no longer applies.)
+  - The check compares what the machine *reports*, and plans are sold in GB, not GiB. A
+    plan sold as "4 GB" reports about 3.8 GiB and still fails; an "8 GB" plan passes.
+  - **One seat:** the smallest plan that reports 4 GiB or more (in practice "8 GB", or
+    "6 GB" where offered).
+  - **Two seats on one server, or `--concurrency 2`:** 8 GB. Two builds can run at the
+    same time.
+  - **Below 4 GiB:** fine for oracle work only. Remove the contract skills
     (`imd skills`, `imd skills remove <id>`) so the network stops sending you work
     that will fail.
+
+  The threshold has changed once already; `imd doctor` on the current release is the
+  authority, not this list.
 
   The disk can stay small: ~40 GB is plenty with the cleanup job from §10.
 
